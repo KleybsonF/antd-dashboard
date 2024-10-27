@@ -41,6 +41,11 @@ export const ProjectsTable = ({ data, ...others }: Props) => {
       ),
     },
     {
+      title: 'Descrição',
+      dataIndex: 'team_size',
+      key: 'proj_team_size',
+    },
+    {
       title: 'Quantidade',
       dataIndex: 'client_name',
       key: 'proj_client_name',
@@ -106,6 +111,15 @@ export const ProjectsTable = ({ data, ...others }: Props) => {
             </Form.Item>
             <Form.Item
               name="client_name"
+              label="Descrição"
+              rules={[
+                { required: true, message: 'Por favor, insira a quantidade!' },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="team_size"
               label="Quantidade"
               rules={[
                 { required: true, message: 'Por favor, insira a quantidade!' },
