@@ -1,10 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { ConfigProvider, Layout, Menu, MenuProps, SiderProps } from 'antd';
-import { InfoCircleOutlined, PieChartOutlined } from '@ant-design/icons';
+import {
+  InfoCircleOutlined,
+  PieChartOutlined,
+  RollbackOutlined,
+} from '@ant-design/icons';
 import { Logo } from '../../components';
 import { Link, useLocation } from 'react-router-dom';
 import { PATH_ABOUT, PATH_DASHBOARD, PATH_LANDING } from '../../constants';
 import { COLOR } from '../../App.tsx';
+import { Flex } from 'antd';
 
 const { Sider } = Layout;
 
@@ -26,6 +31,17 @@ const getItem = (
   } as MenuItem;
 };
 
+const BackButton = () => {
+  return (
+    <Link to={PATH_LANDING.root} style={{ textDecoration: 'none' }}>
+      <Flex>
+        <RollbackOutlined style={{ fontSize: 14 }} /> {/* Tamanho do ícone */}
+        <span style={{ color: 'black' }}></span> {/* Texto ao lado do ícone */}
+      </Flex>
+    </Link>
+  );
+};
+
 const items: MenuProps['items'] = [
   getItem(
     <Link to={PATH_DASHBOARD.root}>Dashboard</Link>,
@@ -33,10 +49,11 @@ const items: MenuProps['items'] = [
     <PieChartOutlined />
   ),
   getItem(
-    <Link to={PATH_ABOUT.root}>About</Link>,
+    <Link to={PATH_ABOUT.root}>Emitir relatório</Link>,
     'about',
     <InfoCircleOutlined />
   ),
+  getItem(<Link to={PATH_LANDING.root}>Voltar</Link>, 'about', <BackButton />),
 ];
 
 const rootSubmenuKeys = ['dashboards', 'corporate', 'user-profile'];
@@ -70,15 +87,6 @@ const SideNav = ({ ...others }: SideNavProps) => {
 
   return (
     <Sider ref={nodeRef} breakpoint="lg" collapsedWidth="0" {...others}>
-      <Logo
-        color="blue"
-        asLink
-        href={PATH_LANDING.root}
-        justify="center"
-        gap="small"
-        imgSize={{ h: 28, w: 28 }}
-        style={{ padding: '1rem 0' }}
-      />
       <ConfigProvider
         theme={{
           components: {
@@ -91,6 +99,15 @@ const SideNav = ({ ...others }: SideNavProps) => {
           },
         }}
       >
+        <Logo
+          color="blue"
+          asLink
+          href={PATH_LANDING.root}
+          justify="center"
+          gap="small"
+          imgSize={{ h: 28, w: 28 }}
+          style={{ padding: '1rem 0' }}
+        />
         <Menu
           mode="inline"
           items={items}

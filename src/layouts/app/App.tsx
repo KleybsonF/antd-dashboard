@@ -1,27 +1,17 @@
 import {
   Button,
-  Dropdown,
   Flex,
   FloatButton,
-  Input,
   Layout,
-  MenuProps,
-  message,
   theme,
   Tooltip,
   Switch,
 } from 'antd';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 import {
-  AppstoreOutlined,
-  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  MessageOutlined,
-  QuestionOutlined,
-  SettingOutlined,
-  UserOutlined,
   MoonOutlined,
   SunOutlined,
 } from '@ant-design/icons';
@@ -35,10 +25,10 @@ import SideNav from './SideNav.tsx';
 import HeaderNav from './HeaderNav.tsx';
 import FooterNav from './FooterNav.tsx';
 import { NProgress } from '../../components';
-import { PATH_LANDING } from '../../constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleTheme } from '../../redux/theme/themeSlice.ts';
 import { RootState } from '../../redux/store.ts';
+
 const { Content } = Layout;
 
 type AppLayoutProps = {
@@ -54,47 +44,10 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
   const [navFill, setNavFill] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const nodeRef = useRef(null);
   const floatBtnRef = useRef(null);
   const dispatch = useDispatch();
   const { mytheme } = useSelector((state: RootState) => state.theme);
-  const items: MenuProps['items'] = [
-    {
-      key: 'user-profile-link',
-      label: 'profile',
-      icon: <UserOutlined />,
-    },
-    {
-      key: 'user-settings-link',
-      label: 'settings',
-      icon: <SettingOutlined />,
-    },
-    {
-      key: 'user-help-link',
-      label: 'help center',
-      icon: <QuestionOutlined />,
-    },
-    {
-      type: 'divider',
-    },
-    {
-      key: 'user-logout-link',
-      label: 'logout',
-      icon: <LogoutOutlined />,
-      danger: true,
-      onClick: () => {
-        message.open({
-          type: 'loading',
-          content: 'signing you out',
-        });
-
-        setTimeout(() => {
-          navigate(PATH_LANDING.root);
-        }, 1000);
-      },
-    },
-  ];
 
   useEffect(() => {
     setCollapsed(isMobile);
@@ -174,22 +127,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                   }}
                 />
               </Tooltip>
-              <Input.Search
-                placeholder="search"
-                style={{
-                  width: isMobile ? '100%' : '400px',
-                  marginLeft: isMobile ? 0 : '.5rem',
-                }}
-                size="middle"
-              />
             </Flex>
             <Flex align="center" gap="small">
-              <Tooltip title="Apps">
-                <Button icon={<AppstoreOutlined />} type="text" size="large" />
-              </Tooltip>
-              <Tooltip title="Messages">
-                <Button icon={<MessageOutlined />} type="text" size="large" />
-              </Tooltip>
               <Tooltip title="Theme">
                 <Switch
                   className=" hidden sm:inline py-1"
@@ -199,17 +138,6 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
                   onClick={() => dispatch(toggleTheme())}
                 />
               </Tooltip>
-              <Dropdown menu={{ items }} trigger={['click']}>
-                <Flex>
-                  <img
-                    src="/me.jpg"
-                    alt="user profile photo"
-                    height={36}
-                    width={36}
-                    style={{ borderRadius, objectFit: 'cover' }}
-                  />
-                </Flex>
-              </Dropdown>
             </Flex>
           </HeaderNav>
           <Content
