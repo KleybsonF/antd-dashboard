@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
   Card,
   GetStartedCard,
@@ -6,6 +6,7 @@ import {
   NotificationsCard,
   PageHeader,
   ProjectsCard,
+  ProjectsTable,
   TasksChartCard,
   TasksListCard,
   WeeklyActivityCard,
@@ -19,6 +20,7 @@ import {
   Col,
   Flex,
   Row,
+  Space,
   Typography,
 } from 'antd';
 import { Helmet } from 'react-helmet-async';
@@ -26,6 +28,7 @@ import { useStylesContext } from '../../context';
 import { useFetchData } from '../../hooks';
 import { Projects } from '../../types';
 import CountUp from 'react-countup';
+import { CloudUploadOutlined, PlusOutlined } from '@ant-design/icons';
 
 const ACTIVITY_DATA = [
   {
@@ -173,6 +176,19 @@ export const DefaultDashboardPage = () => {
       </Helmet>
       <PageHeader title="default dashboard" />
       <Row {...stylesContext?.rowProps}>
+        <Col span={24}>
+          <Card
+            title="Projects"
+            extra={
+              <Space>
+                <Button icon={<CloudUploadOutlined />}>Import</Button>
+                <Button icon={<PlusOutlined />}>New project</Button>
+              </Space>
+            }
+          >
+            <ProjectsTable key="all-projects-table" data={projectsData} />
+          </Card>
+        </Col>
         <Col xs={24} lg={18}>
           <Row {...stylesContext?.rowProps}>
             <Col xs={24} md={24}>

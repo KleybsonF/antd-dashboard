@@ -11,14 +11,7 @@ import {
 import { Column } from '@ant-design/charts';
 import { Projects } from '../../types';
 import { useState } from 'react';
-import {
-  CloudUploadOutlined,
-  HomeOutlined,
-  PieChartOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
-import { DASHBOARD_ITEMS } from '../../constants';
-import { Link } from 'react-router-dom';
+import { CloudUploadOutlined, PlusOutlined } from '@ant-design/icons';
 import { Helmet } from 'react-helmet-async';
 import { useFetchData } from '../../hooks';
 
@@ -183,37 +176,7 @@ export const ProjectsDashboardPage = () => {
       <Helmet>
         <title>Projects | Antd Dashboard</title>
       </Helmet>
-      <PageHeader
-        title="projects dashboard"
-        breadcrumbs={[
-          {
-            title: (
-              <>
-                <HomeOutlined />
-                <span>home</span>
-              </>
-            ),
-            path: '/',
-          },
-          {
-            title: (
-              <>
-                <PieChartOutlined />
-                <span>dashboards</span>
-              </>
-            ),
-            menu: {
-              items: DASHBOARD_ITEMS.map((d) => ({
-                key: d.title,
-                title: <Link to={d.path}>{d.title}</Link>,
-              })),
-            },
-          },
-          {
-            title: 'projects',
-          },
-        ]}
-      />
+      <PageHeader title="projects dashboard" />
       <Row
         gutter={[
           { xs: 8, sm: 16, md: 24, lg: 32 },
