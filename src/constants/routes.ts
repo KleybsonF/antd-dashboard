@@ -3,7 +3,7 @@ function path(root: string, sublink: string) {
 }
 
 const ROOTS_LANDING = '/';
-const ROOTS_DASHBOARD = '/dashboards';
+const ROOTS_DASHBOARD = '/dashboard';
 const ROOTS_SITEMAP = '/sitemap';
 const ROOTS_LAYOUT = '/layouts';
 const ROOTS_CORPORATE = '/corporate';
@@ -34,7 +34,7 @@ export const PATH_LANDING = {
 
 export const PATH_DASHBOARD = {
   root: ROOTS_DASHBOARD,
-  default: path(ROOTS_DASHBOARD, '/default'),
+  default: path(ROOTS_DASHBOARD, ROOTS_LANDING),
   projects: path(ROOTS_DASHBOARD, '/projects'),
   ecommerce: path(ROOTS_DASHBOARD, '/ecommerce'),
   marketing: path(ROOTS_DASHBOARD, '/marketing'),

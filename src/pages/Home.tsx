@@ -204,7 +204,7 @@ export const HomePage = () => {
                   margin: '1.5rem 0',
                 }}
               >
-                A dynamic and versatile multipurpose{' '}
+                A dynamic and versatile2 multipurpose{' '}
                 <span className="text-highlight">dashboard</span> template built
                 using <span className="text-highlight">React</span>,{' '}
                 <span className="text-highlight">Vite</span>,{' '}
