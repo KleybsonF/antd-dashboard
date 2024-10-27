@@ -1,4 +1,13 @@
-import { Modal, Space, Table, TableProps, Typography } from 'antd';
+import {
+  Modal,
+  Space,
+  Table,
+  TableProps,
+  Typography,
+  Button,
+  Form,
+  Input,
+} from 'antd';
 import { Projects } from '../../../../types';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useState } from 'react';
@@ -11,8 +20,7 @@ export const ProjectsTable = ({ data, ...others }: Props) => {
   const [open, setOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Projects | null>(null);
 
-  // Declare as colunas com o tipo ColumnType<Projects>
-  const COLUMNS: any[] = [
+  const COLUMNS = [
     {
       title: 'ID',
       dataIndex: 'team_size',
@@ -49,11 +57,17 @@ export const ProjectsTable = ({ data, ...others }: Props) => {
               setOpen(true);
             }}
           />
-          <DeleteOutlined />
+          <DeleteOutlined onClick={() => {}} />
         </Space>
       ),
     },
   ];
+
+  const onFinish = (values: Projects) => {
+    console.log('Form Values: ', values);
+    // Aqui você pode adicionar a lógica para atualizar o projeto, se necessário
+    setOpen(false); // Fecha o modal após a submissão
+  };
 
   return (
     <>
@@ -67,37 +81,44 @@ export const ProjectsTable = ({ data, ...others }: Props) => {
         title="Detalhes do Projeto"
         centered
         open={open}
-        onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
-        width={1000}
+        width={800}
+        footer={null} // Remover o footer padrão para personalizar
       >
         {selectedProject && (
-          <div>
-            <p>
-              <strong>Name:</strong> {selectedProject.project_name}
-            </p>
-            <p>
-              <strong>Client:</strong> {selectedProject.client_name}
-            </p>
-            <p>
-              <strong>Category:</strong> {selectedProject.project_category}
-            </p>
-            <p>
-              <strong>Priority:</strong> {selectedProject.priority}
-            </p>
-            <p>
-              <strong>Status:</strong> {selectedProject.status}
-            </p>
-            <p>
-              <strong>Team Size:</strong> {selectedProject.team_size}
-            </p>
-            <p>
-              <strong>Duration:</strong> {selectedProject.project_duration}
-            </p>
-            <p>
-              <strong>Start Date:</strong> {selectedProject.start_date}
-            </p>
-          </div>
+          <Form
+            name="project_form"
+            layout="vertical"
+            initialValues={selectedProject} // Preencher os valores iniciais do formulário
+            onFinish={onFinish}
+          >
+            <Form.Item
+              name="project_name"
+              label="Produto"
+              rules={[
+                {
+                  required: true,
+                  message: 'Por favor, insira o nome do produto!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              name="client_name"
+              label="Quantidade"
+              rules={[
+                { required: true, message: 'Por favor, insira a quantidade!' },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Atualizar Projeto
+              </Button>
+            </Form.Item>
+          </Form>
         )}
       </Modal>
     </>

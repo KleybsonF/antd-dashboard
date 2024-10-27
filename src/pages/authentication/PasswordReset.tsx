@@ -35,7 +35,7 @@ export const PasswordResetPage = () => {
 
     message.open({
       type: 'success',
-      content: 'Password reset link sent successfully',
+      content: 'Link para nova senha enviado com sucesso.',
     });
 
     setTimeout(() => {
@@ -59,11 +59,10 @@ export const PasswordResetPage = () => {
         >
           <Logo color="white" />
           <Title level={2} className="text-white">
-            Welcome back to Antd Admin
+            Bem-vindo ao InvControl
           </Title>
           <Text className="text-white" style={{ fontSize: 18 }}>
-            A dynamic and versatile multipurpose dashboard utilizing Ant Design,
-            React, TypeScript, and Vite.
+            Sistema desenvolvido para a Vilalt Café.
           </Text>
         </Flex>
       </Col>
@@ -75,8 +74,8 @@ export const PasswordResetPage = () => {
           gap="middle"
           style={{ height: '100%', width: '100%', padding: '2rem' }}
         >
-          <Title className="m-0">Forgot password</Title>
-          <Text>Enter your email to rest your password.</Text>
+          <Title className="m-0">Esqueci minha senha</Title>
+          <Text>Digite seu email para restaurar sua senha</Text>
           <Form
             name="sign-up-form"
             layout="vertical"
@@ -104,10 +103,10 @@ export const PasswordResetPage = () => {
                   size="middle"
                   loading={loading}
                 >
-                  Submit
+                  Enviar
                 </Button>
                 <Button type="text" size="middle" loading={loading}>
-                  Cancel
+                  Cancelar
                 </Button>
               </Flex>
             </Form.Item>

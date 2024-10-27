@@ -53,7 +53,7 @@ const items: MenuProps['items'] = [
     'about',
     <InfoCircleOutlined />
   ),
-  getItem(<Link to={PATH_LANDING.root}>Voltar</Link>, 'about', <BackButton />),
+  getItem(<Link to={PATH_LANDING.root}>Voltar</Link>, 'nada', <BackButton />),
 ];
 
 const rootSubmenuKeys = ['dashboards', 'corporate', 'user-profile'];
