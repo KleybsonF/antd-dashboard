@@ -12,6 +12,7 @@ import {
 import { Projects } from '../../../../types';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useState } from 'react';
+import { json } from 'react-router-dom';
 
 type Props = {
   data: Projects[];
@@ -19,6 +20,7 @@ type Props = {
 
 export const ProjectsTable = ({ data, ...others }: Props) => {
   const [open, setOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Projects | null>(null);
 
   const COLUMNS = [
     {
@@ -106,9 +108,17 @@ export const ProjectsTable = ({ data, ...others }: Props) => {
       key: 'action',
       fixed: 'right',
       width: 100,
-      render: () => (
+      render: (
+        text: any,
+        record: Projects // Receba os dados da linha
+      ) => (
         <Space size={[10, 1]} wrap>
-          <EditOutlined onClick={() => setOpen(true)} />
+          <EditOutlined
+            onClick={() => {
+              setSelectedProject(record); // Armazene os dados do projeto selecionado
+              setOpen(true); // Abra o modal
+            }}
+          />
           <DeleteOutlined />
         </Space>
       ),
@@ -131,9 +141,30 @@ export const ProjectsTable = ({ data, ...others }: Props) => {
         onCancel={() => setOpen(false)}
         width={1000}
       >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
+        <p>
+          <strong>Name:</strong> {selectedProject?.project_name}
+        </p>
+        <p>
+          <strong>Client:</strong> {selectedProject?.client_name}
+        </p>
+        <p>
+          <strong>Category:</strong> {selectedProject?.project_category}
+        </p>
+        <p>
+          <strong>Priority:</strong> {selectedProject?.priority}
+        </p>
+        <p>
+          <strong>Status:</strong> {selectedProject?.status}
+        </p>
+        <p>
+          <strong>Team Size:</strong> {selectedProject?.team_size}
+        </p>
+        <p>
+          <strong>Duration:</strong> {selectedProject?.project_duration}
+        </p>
+        <p>
+          <strong>Start Date:</strong> {selectedProject?.start_date}
+        </p>
       </Modal>
     </>
   );
